@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nichante Sabato | Personal Website</title>
+    <meta
+      name="description"
+      content="Official personal website for Nichante Sabato — connect with me on social media, learn more about my background, and get in touch."
+    />
+    <style>
+      :root {
+        --bg: #090909;
+        --bg-soft: #121212;
+        --panel: #121212;
+        --panel-alt: #171717;
+        --text: #f5f5f5;
+        --muted: #d2d2d2;
+        --soft: #a8a8a8;
+        --orange: #ff8a1d;
+        --orange-soft: #ffb067;
+        --orange-deep: #c95f00;
+        --line: rgba(255, 255, 255, 0.08);
+        --white: #ffffff;
+        --shadow: rgba(255, 138, 29, 0.18);
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+      }
+      a { color: inherit; text-decoration: none; }
+      .page {
+        min-height: 100vh;
+        background:
+          radial-gradient(circle at top left, rgba(255,138,29,0.14), transparent 26%),
+          radial-gradient(circle at bottom right, rgba(255,138,29,0.08), transparent 22%),
+          var(--bg);
+      }
+      .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        backdrop-filter: blur(10px);
+        background: rgba(9, 9, 9, 0.78);
+        border-bottom: 1px solid var(--line);
+      }
+      .topbar-inner {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 18px 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+      }
+      .brand {
+        font-size: 1.05rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--white);
+      }
+      .nav {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+      .nav a {
+        color: var(--muted);
+        font-size: 0.82rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        transition: color 0.2s ease;
+      }
+      .nav a:hover { color: var(--orange-soft); }
+      .hero { padding: 64px 0 42px; }
+      .hero-inner {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 34px;
+        align-items: center;
+      }
+      .eyebrow {
+        display: inline-block;
+        padding: 8px 14px;
+        border-radius: 999px;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--orange-soft);
+        background: rgba(255, 138, 29, 0.08);
+        border: 1px solid rgba(255, 138, 29, 0.2);
+        margin-bottom: 16px;
+      }
+      .intro {
+        font-size: clamp(2.7rem, 5vw, 5.2rem);
+        line-height: 0.95;
+        letter-spacing: -0.06em;
+        margin: 0 0 18px;
+        font-weight: 900;
+      }
+      .intro .accent { color: var(--orange); }
+      .lead {
+        max-width: 650px;
+        font-size: 1.15rem;
+        color: var(--muted);
+        margin: 0 0 28px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-bottom: 30px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 52px;
+        padding: 0 22px;
+        border-radius: 12px;
+        font-weight: 700;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+      .btn:hover { transform: translateY(-2px); }
+      .btn-primary {
+        background: linear-gradient(135deg, var(--orange), var(--orange-deep));
+        color: #15120f;
+        box-shadow: 0 18px 38px var(--shadow);
+      }
+      .btn-secondary {
+        color: var(--white);
+        border: 1px solid var(--line);
+        background: rgba(255,255,255,0.02);
+      }
+      .mini-stats { display: flex; flex-wrap: wrap; gap: 16px; }
+      .mini-stats div {
+        min-width: 120px;
+        padding: 14px 16px;
+        border-radius: 14px;
+        background: rgba(255,255,255,0.02);
+        border: 1px solid var(--line);
+      }
+      .mini-stats strong {
+        display: block;
+        color: var(--orange-soft);
+        font-size: 1.2rem;
+      }
+      .mini-stats span {
+        color: var(--soft);
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .profile-card {
+        background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        padding: 28px;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+        position: relative;
+        overflow: hidden;
+      }
+      .profile-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(255,138,29,0.08), transparent 45%, rgba(255,255,255,0.02));
+      }
+      .profile-card > * { position: relative; z-index: 1; }
+      .avatar {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--orange), var(--orange-deep));
+        display: grid;
+        place-items: center;
+        font-size: 2.8rem;
+        font-weight: 900;
+        color: #1d130d;
+        margin: 0 auto 20px;
+        box-shadow: 0 22px 40px rgba(255, 138, 29, 0.25);
+      }
+      .profile-name {
+        font-size: 1.8rem;
+        text-align: center;
+        margin: 0 0 6px;
+        font-weight: 800;
+      }
+      .profile-role {
+        text-align: center;
+        color: var(--orange-soft);
+        font-weight: 700;
+        margin-bottom: 18px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 0.74rem;
+      }
+      .profile-tagline {
+        text-align: center;
+        color: var(--orange-soft);
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 0.78rem;
+        margin-top: 12px;
+        margin-bottom: 0;
+      }
+      .profile-bio { margin: 0; text-align: center; color: var(--muted); font-size: 0.98rem; }
+      .section { padding: 40px 0 28px; }
+      .section-inner {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 26px;
+        align-items: start;
+      }
+      .section-title {
+        margin: 0 0 16px;
+        font-size: clamp(1.8rem, 3vw, 3rem);
+        letter-spacing: -0.04em;
+      }
+      .section-sub { color: var(--muted); font-size: 1rem; }
+      .info-card, .contact-card, .story-card, .social-card {
+        background: rgba(255,255,255,0.02);
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        padding: 24px;
+      }
+      .info-list { display: grid; gap: 16px; }
+      .info-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--line);
+      }
+      .info-row:last-child { border-bottom: none; padding-bottom: 0; }
+      .label {
+        color: var(--soft);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 0.74rem;
+      }
+      .value {
+        font-weight: 700;
+        text-align: right;
+        color: var(--white);
+      }
+      .story-card { padding: 30px; }
+      .story-card p {
+        margin: 0 0 18px;
+        color: var(--muted);
+        font-size: 1.02rem;
+      }
+      .story-card p:last-child { margin-bottom: 0; }
+      .skills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 18px;
+      }
+      .skills span {
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: rgba(255,138,29,0.09);
+        border: 1px solid rgba(255,138,29,0.18);
+        color: var(--orange-soft);
+        font-size: 0.76rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .contact-list { display: grid; gap: 18px; }
+      .contact-item {
+        display: grid;
+        grid-template-columns: 52px 1fr;
+        gap: 14px;
+        align-items: center;
+      }
+      .icon-box {
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+        display: grid;
+        place-items: center;
+        background: rgba(255,138,29,0.12);
+        color: var(--orange-soft);
+        border: 1px solid rgba(255,138,29,0.2);
+        font-size: 1.3rem;
+        font-weight: bold;
+      }
+      .contact-item a, .contact-item span { color: var(--white); font-weight: 700; }
+      .contact-item .small {
+        display: block;
+        color: var(--soft);
+        font-size: 0.77rem;
+        font-weight: 400;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+      }
+      .social-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(220px, 1fr));
+        gap: 18px;
+        margin-top: 18px;
+      }
+      .social-link {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 18px 18px;
+        border-radius: 16px;
+        border: 1px solid var(--line);
+        background: rgba(255,255,255,0.02);
+        color: var(--white);
+        font-weight: 700;
+        transition: transform 0.2s ease, border-color 0.2s ease;
+      }
+      .social-link:hover {
+        transform: translateY(-2px);
+        border-color: rgba(255,138,29,0.32);
+      }
+      .social-mark {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        display: grid;
+        place-items: center;
+        font-weight: 900;
+        font-size: 1.3rem;
+      }
+      .facebook { background: #1877F2; color: #fff; }
+      .instagram { background: linear-gradient(135deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5); color: #fff; }
+      .linkedin { background: #0A66C2; color: #fff; }
+      .tiktok { background: #000000; color: #fff; }
+      .x { background: #000000; color: #fff; }
+      .threads { background: #000000; color: #fff; }
+      footer {
+        border-top: 1px solid var(--line);
+        padding: 24px 0 40px;
+        color: var(--soft);
+        font-size: 0.9rem;
+        text-align: center;
+      }
+      @media (max-width: 900px) {
+        .hero-inner, .section-inner { grid-template-columns: 1fr; }
+        .social-grid { grid-template-columns: 1fr; }
+      }
+      @media (max-width: 540px) {
+        .topbar-inner { flex-direction: column; align-items: flex-start; }
+        .nav { width: 100%; justify-content: space-between; }
+        .actions { flex-direction: column; }
+        .btn { width: 100%; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="topbar">
+        <div class="topbar-inner">
+          <div class="brand">Nichante Sabato</div>
+          <nav class="nav">
+            <a href="#about">About</a>
+            <a href="#personal-info">Personal Info</a>
+            <a href="#contact">Contact</a>
+            <a href="#socials">Socials</a>
+          </nav>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div class="container hero-inner">
+            <div>
+              <div class="eyebrow">Personal Website</div>
+              <h1 class="intro">Hi, I'm <span class="accent">Nichante</span><br>Want to connect with me?</h1>
+              <p class="lead">
+                I’m a student at the University of Lusaka studying Actuarial Science, and a tech enthusiast passionate about growth, leadership, and meaningful connection.
+              </p>
+              <div class="actions">
+                <a class="btn btn-primary" href="#contact">Let’s Connect</a>
+                <a class="btn btn-secondary" href="#about">Learn More</a>
+              </div>
+              <div class="mini-stats">
+                <div>
+                  <strong>16</strong>
+                  <span>November</span>
+                </div>
+                <div>
+                  <strong>Lusaka</strong>
+                  <span>Zambia</span>
+                </div>
+                <div>
+                  <strong>Religion</strong>
+                  <span>Christian</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="profile-card">
+              <div class="avatar">N</div>
+              <h2 class="profile-name">Nichante Sabato</h2>
+              <div class="profile-role">Actuarial Science Student</div>
+              <p class="profile-tagline">GOD | GROWTH | GOALS</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="about">
+          <div class="container section-inner">
+            <div>
+              <h2 class="section-title">About Me</h2>
+              <p class="section-sub">A few details about me.</p>
+            </div>
+            <div class="story-card">
+              <p>I’m Nichante Sabato, born on 16 November, and I live in Lusaka, Zambia. I’m a student at the University of Lusaka studying Actuarial Science, and I’m passionate about leadership, growth, and technology.</p>
+              <p>I’ve been trained under the leadership seminar and carry experience in leadership, first aid, knot tying, camping, and outdoor skills.</p>
+              <div class="skills">
+                <span>Leadership</span>
+                <span>First Aid</span>
+                <span>Knot Tying</span>
+                <span>Camping</span>
+                <span>Outdoor Skills</span>
+                <span>Tech Enthusiast</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="personal-info">
+          <div class="container section-inner">
+            <div>
+              <h2 class="section-title">Personal Info</h2>
+              <p class="section-sub">A concise overview of my personal details.</p>
+            </div>
+            <div class="info-card">
+              <div class="info-list">
+                <div class="info-row">
+                  <span class="label">Full Name</span>
+                  <span class="value">Nichante Sabato</span>
+                </div>
+                <div class="info-row">
+                  <span class="label">Birth Date</span>
+                  <span class="value">16 November</span>
+                </div>
+                <div class="info-row">
+                  <span class="label">Location</span>
+                  <span class="value">📍 Lusaka, Zambia</span>
+                </div>
+                <div class="info-row">
+                  <span class="label">University</span>
+                  <span class="value">University of Lusaka</span>
+                </div>
+                <div class="info-row">
+                  <span class="label">Field</span>
+                  <span class="value">Actuarial Science</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="contact">
+          <div class="container section-inner">
+            <div>
+              <h2 class="section-title">Contact Details</h2>
+              <p class="section-sub">Reach out anytime.</p>
+            </div>
+            <div class="contact-card">
+              <div class="contact-list">
+                <div class="contact-item">
+                  <div class="icon-box">@</div>
+                  <div>
+                    <span class="small">Email</span>
+                    <a href="mailto:nichantesabato@gmail.com">nichantesabato@gmail.com</a>
+                  </div>
+                </div>
+                <div class="contact-item">
+                  <div class="icon-box">☎</div>
+                  <div>
+                    <span class="small">Phone</span>
+                    <a href="tel:+260774321817">+260 774 321 817</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="socials">
+          <div class="container section-inner">
+            <div>
+              <h2 class="section-title">Connect With Me</h2>
+              <p class="section-sub">Follow my official channels and connect with me.</p>
+            </div>
+            <div class="social-card">
+              <div class="social-grid">
+                <a class="social-link instagram" href="https://www.instagram.com/n.i.s.h.a.n.t.e?igsh=dm9zYm1jcDdkamI1" target="_blank" rel="noreferrer">
+                  <span>Instagram</span>
+                  <span class="social-mark">◎</span>
+                </a>
+                <a class="social-link facebook" href="https://www.facebook.com/share/1C2RGX5xNt/" target="_blank" rel="noreferrer">
+                  <span>Facebook</span>
+                  <span class="social-mark">f</span>
+                </a>
+                <a class="social-link linkedin" href="https://www.linkedin.com/in/nichante-sabato-41046a418?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noreferrer">
+                  <span>LinkedIn</span>
+                  <span class="social-mark">in</span>
+                </a>
+                <a class="social-link tiktok" href="https://www.tiktok.com/@n_i_s_h_a_n_t_e?_r=1&_t=ZS-98yidgTFvkm" target="_blank" rel="noreferrer">
+                  <span>TikTok</span>
+                  <span class="social-mark">♪</span>
+                </a>
+                <a class="social-link x" href="https://x.com/N_i_s_h_a_n_t_e" target="_blank" rel="noreferrer">
+                  <span>X / Twitter</span>
+                  <span class="social-mark">X</span>
+                </a>
+                <a class="social-link threads" href="https://www.threads.com/@n.i.s.h.a.n.t.e" target="_blank" rel="noreferrer">
+                  <span>Threads</span>
+                  <span class="social-mark">T</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container section-inner">
+            <div>
+              <h2 class="section-title">Religion & Church</h2>
+              <p class="section-sub">My faith and church affiliation.</p>
+            </div>
+            <div class="info-card">
+              <div class="info-list">
+                <div class="info-row">
+                  <span class="label">Religion</span>
+                  <span class="value">Christian</span>
+                </div>
+                <div class="info-row">
+                  <span class="label">Church</span>
+                  <span class="value">Seventh-day Adventist</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <div class="container">© 2026 Nichante Sabato</div>
+      </footer>
+    </div>
+  </body>
+</html>
